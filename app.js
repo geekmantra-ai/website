@@ -421,6 +421,21 @@ function initServiceCards() {
 
   // 1. Dynamic Cursor Spotlight Effect on every Card
   cards.forEach(card => {
+    const cardLink = card.querySelector('.service-btn-primary[href]');
+
+    if (card.hasAttribute('data-card-link') && cardLink) {
+      card.addEventListener('click', (event) => {
+        if (event.target.closest('a, button, input, select, textarea')) return;
+        cardLink.click();
+      });
+
+      card.addEventListener('keydown', (event) => {
+        if (event.target !== card || (event.key !== 'Enter' && event.key !== ' ')) return;
+        event.preventDefault();
+        cardLink.click();
+      });
+    }
+
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
