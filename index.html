@@ -70,7 +70,7 @@
         </a>
 
         <!-- Mobile Hamburger Button -->
-        <button class="hamburger-btn" aria-label="Open Menu">
+        <button class="hamburger-btn" aria-label="Open Menu" aria-controls="mobile-menu-drawer" aria-expanded="false">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -80,7 +80,7 @@
   </nav>
 
   <!-- Mobile Drawer Menu -->
-  <div class="mobile-menu-drawer">
+  <div class="mobile-menu-drawer" id="mobile-menu-drawer">
     <a href="#hero" class="mobile-nav-link">Home</a>
     <a href="#services" class="mobile-nav-link">AI Solutions</a>
     <a href="#lab" class="mobile-nav-link">Interactive AI Demos</a>
@@ -599,7 +599,7 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+          <div class="service-feature-columns">
             <ul class="service-features-list">
               <li>Cutting-edge graphics, canvas flow & 60fps animations</li>
               <li>Autonomous multi-agent execution pipelines</li>

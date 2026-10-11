@@ -37,14 +37,26 @@ function initNavbar() {
 
   if (hamburgerBtn && mobileDrawer) {
     hamburgerBtn.addEventListener('click', () => {
-      mobileDrawer.classList.toggle('open');
+      const isOpen = mobileDrawer.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+      hamburgerBtn.setAttribute('aria-label', isOpen ? 'Close Menu' : 'Open Menu');
       if (window.soundFX) window.soundFX.playClick();
     });
 
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
         mobileDrawer.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        hamburgerBtn.setAttribute('aria-label', 'Open Menu');
       });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !mobileDrawer.classList.contains('open')) return;
+      mobileDrawer.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.setAttribute('aria-label', 'Open Menu');
+      hamburgerBtn.focus();
     });
   }
 }
@@ -54,7 +66,7 @@ function initNavbar() {
    ========================================================================== */
 function initCursorGlow() {
   const glow = document.querySelector('.cursor-glow');
-  if (!glow) return;
+  if (!glow || window.matchMedia('(pointer: coarse)').matches) return;
 
   let mouseX = -1000, mouseY = -1000;
   let currentX = -1000, currentY = -1000;
